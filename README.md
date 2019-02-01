@@ -8,6 +8,12 @@
 git clone https://github.com/plutux-labs/kubeenv ~/.oh-my-zsh/custom/plugins/kubeenv
 ```
 
+Then enable it in plugins sections of your `.zshrc`
+
+```sh
+plugins=(… kubeenv)
+```
+
 ### Usage
 
 ```sh
