@@ -3,8 +3,9 @@ kubeenv () {
   mkdir -p $HOME/.kube/kubeenv/
   for context in `kubectl config get-contexts --output='name'`
   do
-    if [ ! -f $HOME/.kube/kubeenv/$context.yaml ]; then
-      kubectl config view --context $context --minify --raw > $HOME/.kube/kubeenv/$context.yaml
+    normalized_context=$(echo $context | sed 's|/|-|' )
+    if [ ! -f $HOME/.kube/kubeenv/$normalized_context.yaml ]; then
+      kubectl config view --context $context --minify --raw > $HOME/.kube/kubeenv/$normalized_context.yaml
     fi
   done
   # Show usages if no arguments
@@ -27,6 +28,6 @@ alias kenv='kubeenv'
 
 # Completion
 _kubeenv () {
-  _arguments "1: :($(kubectl config get-contexts --output='name'))"
+  _arguments "1: :($(kubectl config get-contexts --output='name' | sed 's|/|-|'))"
 }
 compdef _kubeenv kubeenv kenv
