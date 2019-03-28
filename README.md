@@ -5,7 +5,11 @@
 ### Installation
 
 ```sh
-git clone https://github.com/plutux-labs/kubeenv ~/.oh-my-zsh/custom/plugins/kubeenv
+# yq is needed
+brew install yq
+
+# Get it installed
+rm -rf ~/.oh-my-zsh/custom/plugins/kubeenv && git clone https://github.com/plutux-labs/kubeenv ~/.oh-my-zsh/custom/plugins/kubeenv
 ```
 
 Then enable it in plugins sections of your `.zshrc`
@@ -20,8 +24,11 @@ plugins=(… kubeenv)
 # kubeenv [context]
 kubeenv minikube
 
+# kubeenv [context] [namespace]
+kubeenv minikube some-namespace # But not default
+
 # or just using completion 
-kenv <tab><tab>
+kenv <tab><tab> # Namespace autocomplete is still not available
 ```
 
 ### Caveat
