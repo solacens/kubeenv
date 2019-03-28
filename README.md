@@ -8,8 +8,8 @@
 # yq is needed
 brew install yq
 
-# Get it installed
-rm -rf ~/.oh-my-zsh/custom/plugins/kubeenv && git clone https://github.com/plutux-labs/kubeenv ~/.oh-my-zsh/custom/plugins/kubeenv
+# Get it installed or updated
+rm -rf ~/.oh-my-zsh/custom/plugins/kubeenv && rm -rf ~/.kube/kubeenv && git clone https://github.com/plutux-labs/kubeenv ~/.oh-my-zsh/custom/plugins/kubeenv
 ```
 
 Then enable it in plugins sections of your `.zshrc`
