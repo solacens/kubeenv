@@ -2,7 +2,7 @@ kubeenv () {
   # Making kubeenv separated config files
   mkdir -p $HOME/.kube/kubeenv/
   for context in `kubectl config get-contexts --output='name'`; do
-    normalized_context=$(echo $context | sed 's|/|-|;s/|/-/' )
+    normalized_context=$(echo $context | sed 's|/|-|g;s|:|-|g;s/|/-/g' )
     if [ ! -f $HOME/.kube/kubeenv/$normalized_context.yaml ]; then
       kubectl config view --context $context --minify --raw > $HOME/.kube/kubeenv/$normalized_context.yaml
       for namespace in `kubectl get namespace --output='name' | sed 's|namespace/||'`; do
@@ -42,6 +42,6 @@ alias kenv='kubeenv'
 
 # Completion
 _kubeenv () {
-  _arguments "1: :($(kubectl config get-contexts --output='name' | sed 's|/|-|;s/|/-/'))"
+  _arguments "1: :($(kubectl config get-contexts --output='name' | sed 's|/|-|g;s|:|-|g;s/|/-/g'))"
 }
 compdef _kubeenv kubeenv kenv
